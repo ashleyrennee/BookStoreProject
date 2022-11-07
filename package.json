@@ -1,0 +1,22 @@
+{
+  "name": "geektextapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashleyrennee/BookStoreProject.git"
+  },
+  "author": "Ashley Acevedo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashleyrennee/BookStoreProject/issues"
+  },
+  "homepage": "https://github.com/ashleyrennee/BookStoreProject#readme",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
