@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		int[] arr = new int[50];
+		Scanner scan = new Scanner(System.in);
+		
+		int ID = 0;
+		char question = 'y';
+		System.out.println("Type the ID of the book you want to purchase: ");
+		
+		
+		while(question == 'y') {
+			ID = scan.nextInt();
+
+			System.out.println("This is your current shopping cart, would you like to continue shopping? Type 'y' to continue");
+				for (int i = 0; i < arr.length; i++) {
+					if(arr[i] == 0) {
+						arr[i] = ID;
+						System.out.println(arr[i]);
+						break;
+					}
+					System.out.println(arr[i]);
+				}
+			question = scan.next().charAt(0);
+			if(question == 'y') {
+				System.out.println("Type the ID of the book you want to purchase: ");
+			}
+		}
+		
+		
+		System.out.println("Would you like to delete anything from your shopping cart? Type 'y' to delete something");
+		question = scan.next().charAt(0);
+		
+		while(question == 'y') {
+			System.out.println("Below is your shoppingcart. Type the ID of the Books ID to delete it: ");
+			for (int i = 0; i < arr.length; i++) {
+				if(arr[i] == 0) {
+					break;
+				}
+				System.out.println(arr[i]);
+			}
+			
+			ID = scan.nextInt();
+			
+			for (int i = 0; i < arr.length; i++) {
+				if(arr[i] == ID) {
+					arr[i] = 0;
+					for (int y = i; i < arr.length; y++) {
+						if(i == 49) {
+							break;
+						}
+						arr[y] = arr[y + 1];
+						i++;
+					}
+					break;
+				}
+			}
+			
+			for (int i = 0; i < arr.length; i++) {
+				if(arr[i] == 0) {
+					break;
+				}
+				System.out.println(arr[i]);
+			}
+			System.out.println("Would you like to delete anything from your shopping cart? Type 'y' to delete something");
+			question = scan.next().charAt(0);
+				
+		}
+		
+		
+		System.out.println("Would you like to see your final shoppingcart? Type 'y' to see final cart");
+		question = scan.next().charAt(0);
+		
+		if (question == 'y') {
+			
+			System.out.println("Below is your final shopping cart");
+			
+			for (int i = 0; i < arr.length; i++) {
+				if(arr[i] == 0) {
+					break;
+				}
+				System.out.println(arr[i]);
+			}
+		}
+		
+	}
+
+}
