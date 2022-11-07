@@ -1,0 +1,34 @@
+//needs to be edited to take in user input
+//not all code is correct
+//Credit Card object must be made
+
+import Java.util.Scanner;
+
+public class UserProfile {
+
+  public static void main(String[] args) {
+  
+    public UserProfile() {
+      string email;
+      string password;
+      string f_name;
+      string l_name;
+    }
+    
+    public string getEmail() {
+      return this.email;
+    }
+    
+    public void display() {
+      System.out.println("Email: " + this.email);
+      System.out.println("Password: " + this.password);
+      System.out.println("Name under the account: " + this.f_name + " " + this.l_name);
+    }
+    
+    System.out.println("Please create your User Profile:");
+    
+    //Ask user for their credentials: name, email, and password
+    //
+      
+        
+     
