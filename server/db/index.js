@@ -35,8 +35,6 @@ app.get("/", (req,res) =>{
 });
 
 
-
-
 app.get("/api/books", (req,res) =>{
    var con1 = mysql.createConnection({
       host: "geektxt.cchy5aeo11qe.us-east-1.rds.amazonaws.com",
@@ -61,15 +59,21 @@ app.get("/api/books", (req,res) =>{
    //res.send(["here is a list of books","look another one"]);
 });
 
-app.get("/api/books/bygenre:", (req,res) =>{
+app.get("/api/books/:genre", (req,res) =>{
+   console.log("Book by genre:" + req.params.genre)
    var con2 = mysql.createConnection({
       host: "geektxt.cchy5aeo11qe.us-east-1.rds.amazonaws.com",
       user: "admin",
       password: "12345678",
       database : "geektxt"
      });
-
-   res.send(["here is a list of books by genre","look another one"]);
+   //res.send(["here is a list of books by genre","look another one"]);
+   const queryString = "Select * from BOOKGENRE where genre = ?";
+   const genre = req.params.genre;
+   con2.query(queryString,[genre],(err,rows,fields) => {
+      console.log("fetched books by genre" + rows);
+      res.json(rows);
+   });
 });
 
 app.get("/api/books/topsellers", (req,res) =>{
@@ -83,15 +87,21 @@ app.get("/api/books/topsellers", (req,res) =>{
    res.send(["here is a list of top 10 books","look another one"]);
 });
 
-app.get("/api/books/byrating", (req,res) =>{
+app.get("/api/books/rating/:avr_rating", (req,res) =>{
    var con4 = mysql.createConnection({
       host: "geektxt.cchy5aeo11qe.us-east-1.rds.amazonaws.com",
       user: "admin",
       password: "12345678",
       database : "geektxt"
      });
+   //res.send(["here is a list of books by rating","look another one"]);
+   const queryStringRating = "Select * from BOOK where avr_rating >= ?";
+   const byRating = req.params.avr_rating;
+   con4.query(queryStringRating,[byRating],(err,rows,fields) => {
+      console.log("fetched books by rating" + rows);
+      res.json(rows);
+   });
 
-   res.send(["here is a list of books by rating","look another one"]);
 });
 
 app.get("/api/books/amntofbooks", (req,res) =>{
