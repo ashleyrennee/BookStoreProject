@@ -1,0 +1,32 @@
+# This is a text file on how my part of the code works by itself.
+
+I have three classes made, which all use each other in order to properly operate. Profile_Management extends UserProfile, which in turn extends CreditCard. However, the one that has to be ran is Profile_Management.
+
+As soon as Profile_Management is ran by the user, it will prompt the user to create their first User Profile by inputting a username and a password. From there, there are 6 options that the user can choose from.
+
+1. Add another user profile
+
+This takes the user's input for another username and another password for another user profile to be made.
+
+2. Add a credit card to a user
+
+This first asks the user for a username, and it then asks them for credit card information (card number, security code, exp. date) all in specific formats. 
+
+If the user profile does not exist, the program will continuously ask the user to input an eligible user profile. Any user profile can only hold 3 credit cards.
+If the user inputs data that does not match the format that it is asking the user for, they will be prompted to input the data again until it fits the format asked.
+
+3. Retreive an existing user profile
+
+The program asks the user for a username, and then it returns the username and password of the user profile.
+
+4. Retrieve a list of credit cards attached to a user profile
+
+The program asks the user for a username, then it returns all credit cards on that user profile's name, if there is any. If there is not any, the program will simply tell the user there are no credit cards made for that user profile.
+
+5. Change the password for a user profile
+
+The program asks the user for a username, then it tells the user to input another password. This will change the user profile's password into the new password inputted by the user.
+
+6. View the usernames of all user profiles.
+
+The program simply returns a list of all usernames that were inputted by the user.
