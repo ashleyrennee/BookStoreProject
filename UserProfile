@@ -1,0 +1,55 @@
+public class UserProfile extends CreditCard {
+	
+	private String username;
+	private String password;
+	private CreditCard[] cards = new CreditCard[3];
+	private int cardcount;
+	
+	public UserProfile() {
+	      String username;
+	      String password;
+	      CreditCard[] cards = new CreditCard[3];
+	      int cardcount = 0;
+	}
+	
+    public String getUser() {
+	      return this.username;
+	}
+    
+    public void setUser(String username) {
+    	this.username = username;
+    }
+    
+    public void setPass(String password) {
+    	this.password = password;
+    }
+    
+    public void getCard(int number) {
+    	cards[number].display();
+    }
+    
+    public int getAmount() {
+    	return cardcount;
+    }
+    
+    public void setCard(String cardnum, String code, String date) {
+    	cards[cardcount] = new CreditCard();
+    	cards[cardcount].setID(cardcount + 1);
+    	cards[cardcount].setNumber(cardnum);
+    	cards[cardcount].setCode(code);
+    	cards[cardcount].setDate(date);
+    	cardcount++;
+    }
+    
+    public void getCardDetails(int cardID) {
+    	System.out.println("Card ID: " + cards[cardID].getID());
+    	System.out.println("Card number: " + cards[cardID].getNumber());
+    	System.out.println("Card security code: " + cards[cardID].getCode());
+    	System.out.println("Card exp. date: " + cards[cardID].getDate());
+    }
+    
+    public void display() {
+	      System.out.println("Username: " + this.username);
+	      System.out.println("Password: " + this.password);
+	}
+}
