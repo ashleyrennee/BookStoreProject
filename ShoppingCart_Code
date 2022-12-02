@@ -1,11 +1,35 @@
-//Needs to be edited more for better integration
-
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 
+	// Try Catch is a work in progress i dont think i'll be able to finish	 
+		 try {
+			Connection conn = DriverManager.getConnection(
+					 "geektxt.cchy5aeo11qe.us-east-1.rds.amazonaws.com", "admin", "12345678");
+			 Statement stmt = conn.createStatement();
+			 
+			 
+			 String strSelect = "SELECT ISBN, book_name, price, publisher FROM books";
+			 
+			 ResultSet rset = stmt.executeQuery(strSelect);
+			 
+			 int rowCount = 0;
+			 while(rset.next()) {
+				 int ISBN   = rset.getInt("ISBN");
+				 String title = rset.getString("book_name"); 
+		         double price = rset.getDouble("price");  
+		         String publisher = rset.getString("publisher");
+		         System.out.println(ISBN + " " + title + " " + price + " " + publisher);
+				 ++rowCount;
+			 }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 
+		
 		int[] arr = new int[50];
 		Scanner scan = new Scanner(System.in);
 		
@@ -16,11 +40,13 @@ public class Main {
 		
 		while(question == 'y') {
 			ID = scan.nextInt();
-
 			System.out.println("This is your current shopping cart, would you like to continue shopping? Type 'y' to continue");
 				for (int i = 0; i < arr.length; i++) {
 					if(arr[i] == 0) {
 						arr[i] = ID;
+//						if (ID == ISBN) {
+//							 System.out.println(ISBN + " " + title + " " + price + " " + publisher);
+//						}
 						System.out.println(arr[i]);
 						break;
 					}
