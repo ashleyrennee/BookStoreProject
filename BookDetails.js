@@ -1,10 +1,19 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+var mysql = require('mysql');
+const app = express();
+
+var con = mysql.createConnection({
+    host: "geektxt.cchy5aeo11qe.us-east-1.rds.amazonaws.com",
+    user: "admin",
+    password: "12345678",
+    database: "geektxt"
+});
 
 app.get("/", (req, res) => {
     console.log("responding to root route")
     res.send("Local Book Details")
 })
+
 
 
 app.get("/bookdetails", (req,res) => {
@@ -30,7 +39,5 @@ app.get("/bookdetails", (req,res) => {
                 res.json([book1, book2])
 })
 
-// localhost:3001
-app.listen(3001, () => {
-    console.log("Server is up and listening on 3001...")
-})
+const port = process.env.PORT || 3001;
+app.listen(port, ()=> console.log('listening on port ${port}'));
