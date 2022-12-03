@@ -17,6 +17,16 @@ app.get("/", (req, res) => {
 
 
 app.get("/bookdetails", (req,res) => {
+    var book0 = {ISBN: "null", 
+                bookName: "null", 
+                bookDescription: "null",
+                price: "null",
+                author: "null",
+                genre: "",
+                publisher: "null",
+                year: "null",
+                copiesSold: "null"};
+
     var book1 = {ISBN: "123-3-16-148410-0", 
                 bookName: "Harry's Adventure", 
                 bookDescription: "once upon a time two trolls ran to Harry and offered something special",
@@ -36,7 +46,7 @@ app.get("/bookdetails", (req,res) => {
                 publisher: "Sony",
                 year: "2002",
                 copiesSold: "100"};
-                res.json([book1, book2])
+                res.json([book0, book1, book2])
 })
 
 const port = process.env.PORT || 3001;
