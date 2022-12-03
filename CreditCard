@@ -1,1 +1,51 @@
-
+public class CreditCard {
+	private int id;
+	private String cardnumber;
+	private String scode;
+	private String date;
+	
+	public CreditCard() {
+		int id;
+		String cardnumber;
+		String scode;
+		String date;
+	}
+	
+	public int getID() {
+		return this.id;
+	}
+	
+	public String getNumber() {
+		return this.cardnumber;
+	}
+	
+	public String getCode() {
+		return scode;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
+	public void setNumber(String num) {
+		this.cardnumber = num;
+	}
+	
+	public void setCode(String code) {
+		this.scode = code;
+	}
+	
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
+	public void display() {
+		System.out.println("Card number: " + this.cardnumber);
+		System.out.println("Card's security code: " + this.scode);
+		System.out.println("Card's expiration date: " + this.date);
+	}
+}
