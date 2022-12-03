@@ -1,1 +1,217 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 
+public class Profile_Management extends UserProfile {
+	
+	static Scanner scan = new Scanner(System.in);
+	static ArrayList<UserProfile> users = new ArrayList<UserProfile>();
+	private static int usercount = 0;
+	public static int menu_option;
+	
+	public static void menu() {
+		System.out.println("Please select an option from 1 to 6. Typing any other number will exit the program.");
+    	System.out.println("1. Create a new user profile.");
+    	System.out.println("2. Create a new credit card.");
+    	System.out.println("3. Retrieve an existing user profile.");
+    	System.out.println("4. Retrieve a list of credit cards for an existing user profile.");
+    	System.out.println("5. Change the password for an existing user profile.");
+    	System.out.println("6. View the usernames of all existing user profiles.");
+    }
+	
+    public static void menu1() {
+	    UserProfile user = new UserProfile();
+	    String answer = "n";
+	    String user_temp = null;
+	    while (!(answer.equals("y"))) {
+	      System.out.println("Please enter a username for your profile.");
+	      user_temp = scan.nextLine();
+	      System.out.println("The username for this profile will be: " + user_temp + ". Is this correct?");
+	      System.out.println("Please type 'y' for yes, or 'n' for no.");
+	      answer = scan.nextLine();
+    	  while (!(answer.equals("y") || answer.equals("n"))) {
+    		  System.out.println("Please type either 'y' or 'n'.");
+    		  answer = scan.nextLine();
+    	  }
+    	  if (answer.equals("n")) {
+	    	  System.out.println("Let us re-enter your username, then.");
+	      } else if (answer.equals("y")) {
+	    	  System.out.println("We can move on to the next step, then.");
+	      }		  
+	    }
+	    user.setUser(user_temp);
+	    answer = "n";
+	    String user_temp2 = null;
+	    while (!(answer.equals("y"))) {
+		      System.out.println("Please enter a password for your profile.");
+		      user_temp2 = scan.nextLine();
+		      System.out.println("The password for this profile will be: " + user_temp2 + ". Is this correct?");
+		      System.out.println("Please type 'y' for yes, or 'n' for no.");
+		      answer = scan.nextLine();
+	    	  while (!(answer.equals("y") || answer.equals("n"))) {
+	    		  System.out.println("Please type either 'y' or 'n'.");
+	    		  answer = scan.nextLine();
+	    	  }
+	    	  if (answer.equals("n")) {
+		    	  System.out.println("Let us re-enter your password, then.");
+		      } else if (answer.equals("y")) {
+		    	  System.out.println("Your user profile has been created.");
+		      }		  
+		}
+	    user.setPass(user_temp2);
+	    users.add(user);
+	    usercount++;
+	    menu_option = 0;
+    }
+    
+    public static void menu2() {
+    	String number = "nothing";
+    	String code = "nothing";
+    	String date = "nothing";
+    	String name = "nothing";
+    	boolean checked = false;
+    	boolean numcheck = false;
+    	int id = 0;
+    	while (checked == false) {
+			System.out.println("Please enter the username of the profile this card will be added to.");
+			System.out.println("A user profile may only hold a maximum of 3 credit cards.");
+			name = scan.nextLine();
+			for (int i = 0; i < users.size(); i++) {
+				if (users.get(i).getUser().equals(name)) {
+					if(users.get(i).getAmount() == 3) {
+						System.out.println("A profile can only hold a maximum of 3 credit cards.");
+					} else {
+						checked = true;
+						id = i;
+					}
+				}
+			}
+			if (checked == false) {
+				System.out.println("Please select an eligible user profile, or an existing user profile.");
+			}
+		}
+		while (number.length() != 16 || numcheck == false) {
+			System.out.println("Please enter a 16 digit number.");
+			number = scan.nextLine();
+			numcheck = number.matches("[0-9]+");
+		}
+		numcheck = false;
+		while (code.length() != 3 || numcheck == false) {
+			System.out.println("Please enter a 3 digit security code.");
+			code = scan.nextLine();
+			numcheck = code.matches("[0-9]+");
+		}
+		while (date.length() != 5 || date.indexOf("/") != 2) {
+			System.out.println("Please enter an expiration date in MM/YY format.");
+			date = scan.nextLine();
+		}
+		users.get(id).setCard(number, code, date);
+		System.out.println("The card has been added to the selected profile.");
+		menu_option = 0;
+	}
+    
+    public static void menu3() {
+    	String user_retrieve = null;
+    	boolean check = false;
+    	String stay = "y";
+    	while (stay.equals("y")) {
+    		System.out.println("There are currently " + usercount + " user profile(s) available.");
+    		System.out.println("Please enter the username of the profile you would like to view.");
+    		user_retrieve = scan.nextLine();
+    		for (int i = 0; i < users.size(); i++) {
+    			if (users.get(i).getUser().equals(user_retrieve)) {
+    				users.get(i).display();
+    				check = true;
+    			}
+    		}
+    		if (check == false) {
+    			System.out.println("That user profile does not exist. Please make sure the name is properly capitalized.");
+    		}
+    		System.out.println("Would you like to try again? Type 'y' if yes or 'n' for no.");
+    		stay = scan.nextLine();
+    		while (!(stay.equals("y") || stay.equals("n"))) {
+    			System.out.println("Please type 'y' for yes or 'n' for no.");
+    			stay = scan.nextLine();
+    		}
+    		check = false;
+    	}
+    	menu_option = 0;
+    }
+    
+    public static void menu4() {
+    	String name = null;
+    	boolean checked = false;
+		System.out.println("Enter a username to retrieve cards for.");
+		name = scan.nextLine();
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUser().equals(name)) {
+				if (users.get(i).getAmount() < 1) {
+					System.out.println("No cards have been created for this user profile.");
+					checked = true;
+				} else {
+					for (int x = 0; x < users.get(i).getAmount(); x++) {
+						users.get(i).getCardDetails(x);
+					}
+					checked = true;
+				}
+			}
+		}
+		if (checked == false) {
+			System.out.println("That user profile does not exist. Please make sure the name is properly capitalized.");
+		}
+		menu_option = 0;
+	}
+    
+    public static void menu5() {
+    	String name = null;
+    	String user_temp = null;
+    	boolean checked = false;
+    	System.out.println("Enter the username for the profile who's password will be changed.");
+		name = scan.nextLine();
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUser().equals(name)) {
+				System.out.println("Enter the new password for this user profile.");
+				user_temp = scan.nextLine();
+				users.get(i).setPass(user_temp);
+				System.out.println("The password has been updated.");
+				checked = true;
+			}
+		}
+		if (checked == false) {
+			System.out.println("That user profile does not exist. Please make sure the name is properly capitalized.");
+		}
+		menu_option = 0;
+	}
+    
+    public static void menu6() {
+		for (int i = 0; i < users.size(); i++) {
+				System.out.println(users.get(i).getUser());
+		}
+		menu_option = 0;
+	}
+     
+	public static void main(String[] args) {
+		menu1();
+		while (menu_option >= 0 && menu_option < 7) {
+			if (menu_option == 0) {
+				menu();
+				Scanner id = new Scanner(System.in);
+				while (!id.hasNextInt())
+					id.next();
+				menu_option = id.nextInt();
+		    } else if (menu_option == 1) {
+				menu1();
+			} else if (menu_option == 2) {
+				menu2();
+			} else if (menu_option == 3) {
+				menu3();
+			} else if (menu_option == 4) {
+				menu4();
+			} else if (menu_option == 5) {
+				menu5();
+			} else if (menu_option == 6) {
+				menu6();
+			}
+		}
+		System.out.println("Thank you for using the User Profile system.");
+	}
+}
